@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://ludisa.ge/</loc>
+      <loc>https://www.ludisa.ge/</loc>
       <lastmod>2025-04-17</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
    </url>
    <url>
-      <loc>https://ludisa.ge/buy</loc>
+      <loc>https://www.ludisa.ge/buy</loc>
       <lastmod>2025-04-17</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
    </url>
    <url>
-      <loc>https://ludisa.ge/tastes</loc>
+      <loc>https://www.ludisa.ge/tastes</loc>
       <lastmod>2025-04-17</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>
    <url>
-      <loc>https://ludisa.ge/brand</loc>
+      <loc>https://www.ludisa.ge/brand</loc>
       <lastmod>2025-04-17</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
+      <priority>0.8</priority>
    </url>
    <url>
-      <loc>https://ludisa.ge/contact</loc>
+      <loc>https://www.ludisa.ge/contact</loc>
       <lastmod>2025-04-17</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
+      <priority>0.8</priority>
    </url>
 </urlset>
