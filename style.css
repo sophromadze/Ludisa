@@ -156,7 +156,7 @@ main {
   justify-content: center;
   height: 100%;
   min-height: 130vh;
-  background-image: url('/images/mainBackClean.png');
+  background-image: url('/images/mainBackClean.webp');
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -197,7 +197,11 @@ main {
   transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions when released */
   z-index: 1;
   opacity: 0.6;
-  cursor: pointer;
+  cursor: grab;
+}
+
+.carousel-item[style*="opacity: 1"] {
+  cursor: pointer; /* Pointer cursor only for items with opacity 1 */
 }
 
 .carousel-item.active {
@@ -208,8 +212,13 @@ main {
 }
 
 .carousel-item.active:active {
-  cursor: grabbing;
+  cursor: grabbing !important;
   transition: none;
+}
+
+.carousel.dragging .carousel-item {
+   transition: none;
+   cursor: grabbing !important; /* This will override any other cursor setting */
 }
 
 .carousel-item img {
@@ -234,13 +243,13 @@ main {
 }
 
 
-/* Brand Paege */
-/* Brand Paege */
-/* Brand Paege */
+/* Brand page */
+/* Brand page */
+/* Brand page */
 #brand {
   font-family: "Gilroy GEO Heavy";
   font-size: 32px;
-  background-image: url('/images/background.png');
+  background-image: url('/images/background.webp');
   height: 100%;
   min-height: 100vh;
   background-size: cover;
@@ -265,10 +274,11 @@ main {
  color: rgb(59,35,19);
 }
 
-#brand div p {
+#brand div h2 {
   max-width: 600px;
   text-align: center;
   color: rgb(103,52,52);
+  font-size: 32px;
 }
 
 #brand .chips {
@@ -283,7 +293,7 @@ main {
 #taste {
   font-family: "Gilroy GEO Heavy";
   font-size: 32px;
-  background-image: url('/images/background.png');
+  background-image: url('/images/background.webp');
   height: 100%;
   min-height: 100vh;
   background-size: cover;
@@ -297,7 +307,6 @@ main {
 #taste > div {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   position: relative;
   overflow-x: hidden;
   max-width: 2000px;
@@ -559,7 +568,7 @@ tr:nth-child(even):not(:first-child) td {
 
 #buy {
   font-family: "Gilroy GEO Heavy";
-  background-image: url('/images/background.png');
+  background-image: url('/images/background.webp');
   height: 100%;
   min-height: 100vh;
   background-size: cover;
@@ -747,7 +756,7 @@ tr:nth-child(even):not(:first-child) td {
 
 #contact {
   font-family: "Gilroy GEO Heavy";
-  background-image: url('/images/background.png');
+  background-image: url('/images/background.webp');
   height: 100%;
   min-height: 100vh;
   background-size: cover;
@@ -824,6 +833,7 @@ footer ul li a {
   font-size: 20px;
   transition: 0.3s all;
   white-space: nowrap;
+  font-family: "Gilroy GEO Heavy";
 }
 
 footer ul li a:hover {
@@ -917,7 +927,7 @@ footer p {
 
 @media (max-width: 990px) or (max-height:700px) { 
   main {
-    background-image: url(/images/mainBackCleanMobile.png);
+    background-image: url('/images/mainBackCleanMobile.webp');
   }
 }
 
@@ -1206,7 +1216,7 @@ footer p {
   }
 
   main {
-    background-image: url(/images/background.png);
+    background-image: url('/images/background.webp');
   }
 
   nav .mainLogo {
@@ -1380,7 +1390,7 @@ footer p {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 535px) {
   footer ul {
     flex-wrap: wrap;
     gap: 5px;
@@ -1413,7 +1423,7 @@ footer p {
     font-size: 35px;
   }
 
-  #brand div p {
+  #brand div h2 {
     font-size: 23px;
   }
 

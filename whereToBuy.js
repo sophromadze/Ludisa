@@ -32,17 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function formatAddress(item) {
     const parts = [];
-    
-    if (item.რეგიონი) parts.push(item.რეგიონი);
+  
     if (item.ქალაქი) parts.push(item.ქალაქი);
-    // if (item.თბილისის_რაიონი) parts.push(item.თბილისის_რაიონი);
+    if (item.უბანი) parts.push(item.უბანი);
     if (item.მისამართი) parts.push(item.მისამართი);
     return parts.join(', ');
   }
   
   function getMarketInfo(item) {
-    if (item.მარკეტი) return `"${item.მარკეტი}"`;
-    if (item.ქსელი) return `"${item.ქსელი}"`;
+    if (item.მარკეტი_ქსელი) return `"${item.მარკეტი_ქსელი}"`;
     return '---'; // Return empty string if no market info is available
   }
   

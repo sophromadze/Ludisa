@@ -1,12 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Get the product index from URL parameters
+     const urlParams = new URLSearchParams(window.location.search);
+     const productParam = urlParams.get('product');
+     let initialIndex = 0; // Default to first product
+     // If product parameter exists and is valid, use it
+     if (productParam !== null) {
+         const parsedIndex = parseInt(productParam);
+         if (!isNaN(parsedIndex) && parsedIndex >= 0 && parsedIndex < 3) {
+             initialIndex = parsedIndex;
+         }
+         // Clean up the URL to remove the query parameter
+         window.history.replaceState({}, document.title, '/tastes');
+     }
+    
+    // Check if hash exists and is valid
+     if (window.location.hash) {
+       const hashValue = window.location.hash.substring(1); // Remove the # symbol
+       const parsedIndex = parseInt(hashValue);
+       if (!isNaN(parsedIndex) && parsedIndex >= 0 && parsedIndex < 3) {
+           initialIndex = parsedIndex;
+       }
+     }
+
     // Use actual paths to your images
     const images = [
-      '/images/salty.png',
-      '/images/onion.png',
-      '/images/tomato.png',
-    //   '/images/yviteli.png',
-    //   '/images/lurji.png',
-    //   '/images/stafilosferi.png'
+      '/images/salty.webp',
+      '/images/onion.webp',
+      '/images/tomato.webp',
     ];
     
     const mainImg = document.getElementById('main-img');
@@ -15,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.querySelector('.prev-button');
     const nextButton = document.querySelector('.next-button');
     
-    let currentIndex = 0;
+    let currentIndex = initialIndex; // Use the index from URL parameter
     
-    // Initialize images
-    if (mainImg) {
+     // Initialize images
+     if (mainImg) {
       mainImg.src = images[currentIndex];
       
       thumbnails.forEach((thumb, index) => {
@@ -134,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
       changeSlide(newIndex, direction);
     });
     
-    // Initialize visible thumbnails and description
+    // Initialize visible thumbnails and description with the current index
     updateVisibleThumbnails();
     updateActiveDescription();
   });

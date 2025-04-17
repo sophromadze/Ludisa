@@ -1,8 +1,8 @@
 // Image paths - KEEP THIS AS-IS
 const images = [
-  '/images/onion.png',
-  '/images/salty.png',
-  '/images/tomato.png'
+  '/images/salty.webp',
+  '/images/onion.webp',
+  '/images/tomato.webp'
 ];
 
 class Carousel {
@@ -15,7 +15,7 @@ class Carousel {
     this.isDragging = false;
     this.startX = 0;
     this.currentX = 0;
-    this.dragThreshold = 0.2; // 20% threshold for changing slides
+    this.dragThreshold = 0.1; // 20% threshold for changing slides
     this.dragOffset = 0;
     this.items = [];
     this.isUserInteracted = false;
@@ -117,22 +117,27 @@ class Carousel {
       // Current item (center)
       currentItem.style.transform = `translateX(0) scale(${activeScale})`;
       currentItem.style.opacity = '1';
+      currentItem.style.cursor = 'pointer'; // Add this line
       
       // Previous item (left)
       prevItem.style.transform = `translateX(-${baseTranslate}%) scale(${mobileScale})`;
       prevItem.style.opacity = '0.6';
+      prevItem.style.cursor = 'grab'; // Add this line
       
       // Next item (right)
       nextItem.style.transform = `translateX(${baseTranslate}%) scale(${mobileScale})`;
       nextItem.style.opacity = '0.6';
+      nextItem.style.cursor = 'grab'; // Add this line
       
       // Far previous item (far left)
       prevPrevItem.style.transform = `translateX(-${baseTranslate * 1.5}%) scale(${mobileScale * 0.8})`;
       prevPrevItem.style.opacity = '0.6';
+      prevPrevItem.style.cursor = 'grab'; // Add this line
       
       // Far next item (far right)
       nextNextItem.style.transform = `translateX(${baseTranslate * 1.5}%) scale(${mobileScale * 0.8})`;
       nextNextItem.style.opacity = '0.6';
+      nextNextItem.style.cursor = 'grab'; // Add this line
       
       return;
     }
@@ -197,9 +202,15 @@ class Carousel {
     // Click events for side images
     this.items.forEach((item, index) => {
       item.addEventListener('click', (e) => {
-        if (!this.isDragging && index !== this.currentIndex) {
-          this.isUserInteracted = true;
-          this.goToSlide(index);
+        if (!this.isDragging) {
+          if (index === this.currentIndex) {
+            // Use hash instead of query parameter
+            window.location.href = `/tastes#${index}`;
+          } else {
+            // For side images, keep the existing behavior
+            this.isUserInteracted = true;
+            this.goToSlide(index);
+          }
         }
       });
     });
@@ -222,6 +233,9 @@ class Carousel {
     this.startX = e.clientX || e.touches[0].clientX;
     this.currentX = this.startX;
     this.dragOffset = 0;
+
+    // Add this line to change cursor during dragging
+    document.body.style.cursor = 'grabbing';
     
     // Stop auto change while dragging
     this.stopAutoChange();
@@ -234,7 +248,7 @@ class Carousel {
     this.currentX = e.clientX || (e.touches ? e.touches[0].clientX : this.currentX);
     const containerWidth = this.carousel.offsetWidth;
     const dragDistance = this.currentX - this.startX;
-    this.dragOffset = dragDistance / (containerWidth * 0.5); // 50% of container = full slide
+    this.dragOffset = dragDistance / (containerWidth * 0.2); // 50% of container = full slide
     
     // Update carousel with exact drag percentage
     this.updateCarousel(this.dragOffset);
@@ -245,6 +259,9 @@ class Carousel {
     
     this.carousel.classList.remove('dragging');
     this.isDragging = false;
+
+    // Add this line to reset cursor after dragging
+    document.body.style.cursor = '';
     
     // Change slide if dragged past threshold
     if (Math.abs(this.dragOffset) > this.dragThreshold) {
