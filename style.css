@@ -1084,6 +1084,7 @@ footer p {
     position: relative;
     width: 24px;
     height: 24px;
+    transform: rotate(225deg); /* Add permanent rotation when menu is open */
   }
 
   .menu-wrap .toggler:checked + .hamburger > div span {
@@ -1117,11 +1118,6 @@ footer p {
   .menu-wrap .toggler:checked + .hamburger > div:after {
     top: 0;
     transform: rotate(90deg);
-  }
-  
-  /* Rotate On Hover When Checked */
-  .menu-wrap .toggler:checked:hover + .hamburger > div {
-    transform: rotate(225deg);
   }
   
   /* Show Menu */
