@@ -56,24 +56,40 @@ function handleScroll() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadHTML("header", "header.html").then(() => {
-    setActiveNavItem();
-    // Initialize scroll handler after header is loaded
-    window.addEventListener('scroll', throttle(handleScroll, 100));
-  });
-  loadHTML("footer", "footer.html");
-});
-
-async function loadHTML(id, file) {
+// Load header and footer
+async function loadHeaderFooter() {
   try {
-    const response = await fetch(file);
-    if (!response.ok) throw new Error(`Could not load ${file}`);
-    const data = await response.text();
-    const element = document.getElementById(id);
-    if (element) element.innerHTML = data;
-    return true;
+    const [headerResponse, footerResponse] = await Promise.all([
+      fetch("header.html"),
+      fetch("footer.html")
+    ]);
+
+    if (!headerResponse.ok || !footerResponse.ok) {
+      throw new Error('Failed to load header or footer');
+    }
+
+    const headerHTML = await headerResponse.text();
+    const footerHTML = await footerResponse.text();
+
+    const headerElement = document.getElementById("header");
+    const footerElement = document.getElementById("footer");
+
+    if (headerElement) {
+      headerElement.innerHTML = headerHTML;
+      setActiveNavItem();
+      window.addEventListener('scroll', throttle(handleScroll, 100));
+    }
+
+    if (footerElement) {
+      footerElement.innerHTML = footerHTML;
+    }
   } catch (error) {
-    console.error(error);
+    console.error('Error loading header/footer:', error);
   }
 }
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+  // Load header and footer
+  loadHeaderFooter();
+});
